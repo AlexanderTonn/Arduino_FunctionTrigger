@@ -9,18 +9,27 @@
  * 
  */
 
-#ifndef FUNCTION_TRIGGER_HPP
-#define FUNCTION_TRIGGER_HPP
+#ifndef TIMER_HPP
+#define TIMER_HPP
 
 #include <Arduino.h>
 
-class FunctionTrigger
+class timer
 {
     private: 
     uint32_t mTimestamp = 0; 
 
+    enum class objectUsage
+    {
+        NONE,
+        CYCLIC_MODE,
+        DELAY_MODE
+    };
+    objectUsage mUsage = objectUsage::NONE; //Flag for blocking other functions if one time functions is used in this object
+
     public: 
-    auto functionTrigger(const uint32_t ) -> bool;
+    auto cyclic(const uint32_t ) -> bool;
+    auto delayOn(const uint32_t, const bool) -> bool;
 };
 
-#endif // FUNCTION_TRIGGER_HPP
+#endif // TIMER_HPP
